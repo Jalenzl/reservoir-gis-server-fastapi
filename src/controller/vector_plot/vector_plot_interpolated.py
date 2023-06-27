@@ -104,8 +104,10 @@ def create_vector_plot_interpolated(url_x, url_y, properties_arr_x, properties_a
         t = ax.tricontourf(lon, lat, properties_arr_composition, levels=levels, colors=colors)
 
         # 绘制矢量箭头
-        q = ax.quiver(lon, lat, U / M, V / M, M)
-        ax.set_title('Vector flow field of oil velocity', pad=18, fontsize=15, fontweight='bold')
+        # 绘制矢量箭头
+        q = ax.quiver(lon, lat, U, V, M, scale=0.4, width=0.002, headwidth=5, headlength=5, headaxislength=3.5,
+                      zorder=10)
+        ax.set_title('Flow vector field of oil velocity', pad=18, fontsize=15, fontweight='bold')
 
         # color bar
         plt.colorbar(mappable=t, ax=ax, shrink=0.5, pad=-0.07, aspect=10, format='%.3f', anchor=(0.9, 0.5),
