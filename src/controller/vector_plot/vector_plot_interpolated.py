@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from mpl_toolkits.basemap import Basemap
 from pylab import hypot
 from numpy import arange
 from matplotlib.pyplot import subplots
@@ -33,6 +34,13 @@ def create_vector_plot_interpolated(url_x, url_y, properties_arr_x, properties_a
 
         # 绘图
         fig, ax = subplots(figsize=(8, 5.36))
+
+        # basemap 设置
+        m = Basemap(llcrnrlon=118.555374, llcrnrlat=37.525674, urcrnrlon=118.562485, urcrnrlat=37.529734,
+                    resolution='i', projection='tmerc', lat_0=37.545, lon_0=118.559504, lat_1=37.527553, ax=ax)
+        lon, lat = m(X, Y)
+        m.drawmeridians([118.557000, 118.56100], labels=[1, 0, 0, 1], linewidth=0.7, color="#424242", dashes=[5, 5])
+        m.drawparallels([37.526500, 37.5288], labels=[1, 0, 0, 1], linewidth=0.7, dashes=[5, 5])
 
         # 绘制二维场图
         plot_range = max(properties_arr_composition) - min(properties_arr_composition)
@@ -93,10 +101,10 @@ def create_vector_plot_interpolated(url_x, url_y, properties_arr_x, properties_a
             "#ff0e00",
             "#ff0000",
         ]
-        t = ax.tricontourf(X, Y, properties_arr_composition, levels=levels, colors=colors)
+        t = ax.tricontourf(lon, lat, properties_arr_composition, levels=levels, colors=colors)
 
         # 绘制矢量箭头
-        q = ax.quiver(X, Y, U / M, V / M, M)
+        q = ax.quiver(lon, lat, U / M, V / M, M)
         ax.set_title('Vector flow field of oil velocity', pad=18, fontsize=15, fontweight='bold')
 
         # color bar
