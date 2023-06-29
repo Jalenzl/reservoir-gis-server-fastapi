@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from pylab import hypot
 from numpy import arange
 from matplotlib.pyplot import subplots, show
