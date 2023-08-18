@@ -3,7 +3,7 @@ from mpl_toolkits.basemap import Basemap
 from pylab import hypot
 from numpy import arange
 from matplotlib.pyplot import subplots
-from utils import get_centroid, get_geojson
+from src.utils.index import get_centroid, get_geojson
 from io import BytesIO
 import base64
 
@@ -120,6 +120,8 @@ def create_vector_plot_interpolated(url_x, url_y, properties_arr_x, properties_a
         # 从内存中读取图片并转化为base64
         data = save_file.getvalue()
         img_base64 = base64.b64encode(data).decode('utf-8')
+
+        plt.show()
 
         return img_base64
 

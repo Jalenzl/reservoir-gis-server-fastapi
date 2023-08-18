@@ -1,8 +1,12 @@
 from fastapi import FastAPI
 from src.controller.vector_plot.vector_plot_fixed import create_vector_plot_fixed
 from src.controller.vector_plot.vector_plot_interpolated import create_vector_plot_interpolated
+from src.controller.vector_plot.vector_plot_calc import create_vector_plot_calc
+from src.controller.calc_velocity.index import calc_velocity
 from src.entity.vector_plot.vector_plot_entity_interpolated import VectorPlotEntityInterpolated
 from src.entity.vector_plot.vector_plot_entity_fixed import VectorPlotEntityFixed
+from src.entity.vector_plot.vector_plot_entity_calc import VectorPlotEntityCalc
+from src.entity.calc_velocity.flow_velocity import FlowVelocityEntity
 
 app = FastAPI()
 
@@ -34,6 +38,26 @@ async def send_vector_plot(plot_entity: VectorPlotEntityInterpolated):
     return {
         "code": 200,
         "img_base64": "data:image/png;base64," + img_base64
+    }
+
+
+@app.post("/api/v1/vectorPlotCalc")
+async def send_vector_plot(plot_entity: VectorPlotEntityCalc):
+    img_base64 = create_vector_plot_calc(plot_entity.type, plot_entity.layer, plot_entity.time)
+
+    return {
+        "code": 200,
+        "img_base64": "data:image/png;base64," + img_base64
+    }
+
+
+@app.post("/api/v1/clacFlowVelocity")
+async def send_flow_velocity(velocity_entity: FlowVelocityEntity):
+    velocity_water, velocity_oil = calc_velocity(velocity_entity.layer, velocity_entity.time)
+    return {
+        "code": 200,
+        "velocity_water": velocity_water,
+        "velocity_oil": velocity_oil
     }
 
 

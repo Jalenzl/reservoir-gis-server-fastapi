@@ -1,10 +1,9 @@
 import matplotlib.pyplot as plt
-import numpy as np
 from pylab import hypot
 from numpy import arange
 from matplotlib.pyplot import subplots, show
 from mpl_toolkits.basemap import Basemap
-from utils import get_centroid, get_geojson
+from src.utils.index import get_centroid, get_geojson
 from io import BytesIO
 import base64
 
