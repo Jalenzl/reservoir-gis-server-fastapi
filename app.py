@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 from src.controller.vector_plot.vector_plot_fixed import create_vector_plot_fixed
 from src.controller.vector_plot.vector_plot_interpolated import create_vector_plot_interpolated
 from src.controller.vector_plot.vector_plot_calc import create_vector_plot_calc
@@ -9,6 +10,17 @@ from src.entity.vector_plot.vector_plot_entity_calc import VectorPlotEntityCalc
 from src.entity.calc_velocity.flow_velocity import FlowVelocityEntity
 
 app = FastAPI()
+
+# 设置允许访问的域名
+origins = ["*"]
+
+# 设置跨域传参
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # 设置允许的origins来源
+    allow_credentials=True,
+    allow_methods=["*"],  # 设置允许跨域的http方法，比如 get、post、put等。
+    allow_headers=["*"])  # 允许跨域的headers，可以用来鉴别来源等作用。
 
 
 @app.get("/")
