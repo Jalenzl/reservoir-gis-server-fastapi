@@ -215,8 +215,9 @@ def get_pressure_gradient(properties_arr_pressure):
 def get_relative_permeability(properties_arr_waterSaturation):
     krw = [(2.3121 * Sw * Sw - 1.4891 * Sw + 0.2447) for Sw in properties_arr_waterSaturation]
     krow = [(
-            0.00000006 * Sw ** 6 - 0.000005 * Sw ** 5 + 0.0001 * Sw ** 4 - 0.0013 * Sw ** 3 - 0.0028 * Sw ** 2 + 0.0115 * Sw + 0.9851)
+            -598.0 * Sw ** 6 +2064.9 * Sw ** 5 - 2941.8 * Sw ** 4 + 2192.7 * Sw ** 3 - 887.48 * Sw ** 2 + 178.92 * Sw - 12.838)
         for Sw in properties_arr_waterSaturation]
+
     # 确保所有相对渗透率在0到1范围内
     for index, krwi in enumerate(krw):
         if krwi > 1:
@@ -239,6 +240,6 @@ def calc_velocity(layer, time):
     krw, krow = get_relative_permeability(properties_arr_waterSaturation)
     velocity_water = [(grad * krw * ko / 0.3368 / 10000) for grad, krw, ko in
                       zip(gradient_magnitude_778, krw, properties_arr_permeability)]
-    velocity_oil = [(grad * krow * kw / 0.3368 / 10000) for grad, krow, kw in
+    velocity_oil = [(grad * krow * kw / 0.3368 / 10000 / 165) for grad, krow, kw in
                     zip(gradient_magnitude_778, krow, properties_arr_permeability)]
     return velocity_water, velocity_oil

@@ -45,12 +45,15 @@ def create_vector_plot_calc(type, layer, time):
 
     # 绘制二维场图
     velocity = []
+    peak = 1.41
     if type == 'water':
         velocity = velocity_water
+        peak = max(velocity) if max(velocity) > 1.41 else 1.41
     elif type == 'oil':
         velocity = velocity_oil
-    plot_range = max(velocity) - min(velocity)
-    levels = arange(min(velocity), max(velocity), plot_range / 55)
+        peak = max(velocity) if max(velocity) > 0.19 else 0.19
+
+    levels = arange(0, peak, peak / 55)
     colors = [
         "#0000ff",
         "#000eff",
