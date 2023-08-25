@@ -111,7 +111,7 @@ def create_vector_plot_calc(type, layer, time):
 
     # 绘制矢量箭头
     q = ax.quiver(lon, lat, U, V, M)
-    ax.set_title('Flow vector field of oil velocity', pad=18, fontsize=15, fontweight='bold')
+    ax.set_title(f'Flow vector field of {type} velocity', pad=18, fontsize=15, fontweight='bold')
 
     # color bar
     plt.colorbar(mappable=t, ax=ax, shrink=0.5, pad=-0.07, aspect=10, format='%.3f', anchor=(0.9, 0.5),
