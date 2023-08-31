@@ -1,5 +1,4 @@
 import os
-import multiprocessing
 
 # 设置守护进程
 daemon = True
@@ -11,7 +10,7 @@ chdir = '.'  # 工作目录
 # 工作模式
 worker_class = 'uvicorn.workers.UvicornWorker'
 # 并行工作进程数 核心数*2+1个
-workers = multiprocessing.cpu_count()+1
+workers = 8
 # 指定每个工作者的线程数
 threads = 2
 # 设置最大并发量
@@ -25,4 +24,4 @@ if not os.path.exists(log_dir):
 accesslog = "./var/log/gunicorn_access.log"
 errorlog = "./var/log/gunicorn_error.log"
 # 日志级别，这个日志级别指的是错误日志的级别，而访问日志的级别无法设置
-loglevel = 'warning'
+loglevel = 'debug'
