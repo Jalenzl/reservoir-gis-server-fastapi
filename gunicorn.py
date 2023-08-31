@@ -3,11 +3,11 @@ import multiprocessing
 
 # 设置守护进程
 daemon = True
-# 监听内网端口5391
+# 监听内网端口5301
 bind = '0.0.0.0:5301'
 # 设置进程文件目录
 pidfile = './gunicorn.pid'
-chdir = './'  # 工作目录
+chdir = '.'  # 工作目录
 # 工作模式
 worker_class = 'uvicorn.workers.UvicornWorker'
 # 并行工作进程数 核心数*2+1个
