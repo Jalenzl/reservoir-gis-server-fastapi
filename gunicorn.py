@@ -1,7 +1,7 @@
 import os
 
 # 设置守护进程
-daemon = True
+daemon = False
 # 监听内网端口5301
 bind = '0.0.0.0:5301'
 # 设置进程文件目录
