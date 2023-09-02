@@ -1,7 +1,7 @@
 import os
 
 # 设置守护进程
-daemon = False
+daemon = True
 # 监听内网端口5301
 bind = '0.0.0.0:5301'
 # 设置进程文件目录
@@ -24,4 +24,4 @@ if not os.path.exists(log_dir):
 accesslog = "./var/log/gunicorn_access.log"
 errorlog = "./var/log/gunicorn_error.log"
 # 日志级别，这个日志级别指的是错误日志的级别，而访问日志的级别无法设置
-loglevel = 'debug'
+loglevel = 'warning'
