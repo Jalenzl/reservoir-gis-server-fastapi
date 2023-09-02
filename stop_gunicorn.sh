@@ -1,8 +1,6 @@
 #!/bin/bash
-​
 # 查找 gunicorn 主进程 PID
 gunicorn_pid=$(ps aux | grep 'gunicorn' | grep -v 'grep' | awk '{print $2}')
-​
 # 如果找到了主进程 PID
 if [ -n "$gunicorn_pid" ]; then
   echo "Found gunicorn process: $gunicorn_pid"
