@@ -1,3 +1,4 @@
+import multiprocessing
 import os
 
 # 设置守护进程
@@ -10,7 +11,7 @@ chdir = '.'  # 工作目录
 # 工作模式
 worker_class = 'uvicorn.workers.UvicornWorker'
 # 并行工作进程数 核心数*2+1个
-workers = 8
+workers = multiprocessing.cpu_count()+1
 # 指定每个工作者的线程数
 threads = 2
 # 设置最大并发量
